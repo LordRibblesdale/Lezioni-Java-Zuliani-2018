@@ -1,8 +1,18 @@
+class IndexOutOfBoundsExeption extends Exception {
+   IndexOutOfBoundsExeption() {
+      super("Index not in the array.");
+   }
+
+   IndexOutOfBoundsExeption(String msg) {
+      super(msg);
+   }
+}
+
 public class Telefono {
    private String modello, sistemaOperativo;
    private float dimensioneSchermo;
    private int memoria;
-   public int[] ultimeChiamate = new int[10]; //? public or private?
+   private int[] ultimeChiamate = new int[10];
 
    Telefono() {
       modello = "NoName";
@@ -69,7 +79,16 @@ public class Telefono {
    }
 
    public int getChiamataRecente(int index) {
-      return ultimeChiamate[index];
+      try {
+         if (index < 0 || index > 9) {
+            throw new IndexOutOfBoundsExeption();
+         } else {
+            return ultimeChiamate[index];
+         }
+      } catch(Exception e) {
+         System.out.println(e.getMessage() + "\nReturning first array item...");
+         return getChiamataRecente(0);
+      }
    }
 
    public void chiama(int num) {

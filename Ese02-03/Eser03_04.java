@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Eser03 {
+public class Eser03_04 {
    public static int generaNumeroCasuale() {
       int rnd = (int)Math.floor(Math.random()*3)+1;
       String s = "";
@@ -40,9 +40,7 @@ public class Eser03 {
          System.out.println(phone.getChiamataRecente(0));
          if (((i+1) % 3 == 0)) {
             System.out.print("\nInserisci un indice [1-10]: ");
-            do {
-               indx = in.nextInt()-1;
-            } while (indx < 0 || indx > 9);
+            indx = in.nextInt()-1;
             System.out.println("> " + phone.getChiamataRecente(indx));
          }
          if (((i+1) % 5 == 0)) {

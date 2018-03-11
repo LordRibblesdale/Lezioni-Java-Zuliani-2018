@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Eser02 {
+public class Eser02_04 {
    public static int generaNumero() {
       int rnd = (int)Math.floor(Math.random()*3)+1, tmp = 0;
       String s = "";
@@ -33,7 +33,7 @@ public class Eser02 {
    public static void main(String[] args) {
       Scanner in = new Scanner(System.in);
       Telefono phone = new Telefono("One Plus 5T", "Android OS", (float)(5.7), 8);
-      int indx = -1;
+      int index = -1;
 
       for (int i = 0; i < 15; i++) {
          System.out.println(i);
@@ -41,10 +41,8 @@ public class Eser02 {
          System.out.println(phone.getChiamataRecente(0));
          if (((i+1) % 5 == 0)) {
             System.out.print("\nInserisci un indice [1-10]: ");
-            do {
-               indx = in.nextInt()-1;
-            } while (indx < 0 || indx > 9);
-            System.out.println("> " + phone.getChiamataRecente(indx));
+            index = in.nextInt()-1;
+            System.out.println("> " + phone.getChiamataRecente(index));
          }
       }
    }

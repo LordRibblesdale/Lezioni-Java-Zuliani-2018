@@ -30,14 +30,23 @@ public class Smartphone extends Telefono {
       apps[index] = "";
    }
 
-   public int getNumeroPreferito(int indx) {
-      return numeriPreferiti[indx];
+   public int getNumeroPreferito(int index) {
+      try {
+         if (index < 0 || index > 4) {
+            throw new IndexOutOfBoundsExeption();
+         } else {
+            return numeriPreferiti[index];
+         }
+      } catch(Exception e) {
+         System.out.println(e.getMessage() + "\nReturning first array item...");
+         return getNumeroPreferito(0);
+      }
    }
 
    public void chiama(int num) {
-      for (int i = 0; i < ultimeChiamate.length; i++) {
-         if (num == ultimeChiamate[i]) {
-            for (int j = numeriPreferiti.length-1; j > 0; j--) {
+      for (int i = 0; i < 10; i++) {
+         if (num == getChiamataRecente(i)) {
+            for (int j = 9; j > 0; j--) {
                numeriPreferiti[j] = numeriPreferiti[j-1];
             }
             numeriPreferiti[0] = num;
