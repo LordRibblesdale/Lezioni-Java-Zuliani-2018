@@ -9,9 +9,7 @@ public abstract class Dolce {
       nome = name;
    }
 
-   public String descrizione() {
-      //abstract method
-   }
+   public abstract String descrizione();
 
    public String toString() {
       return nome;
