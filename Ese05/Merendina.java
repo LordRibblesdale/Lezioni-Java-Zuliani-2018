@@ -1,6 +1,6 @@
 public class Merendina extends Dolce {
-   String marca;
-   int prezzo;
+   private String marca;
+   private int prezzo;
 
    Merendina() {
       super();
@@ -12,6 +12,10 @@ public class Merendina extends Dolce {
       super(name);
       marca = brand;
       prezzo = price;
+   }
+
+   public int getPrezzo() {
+      return prezzo;
    }
 
    public String descrizione() {

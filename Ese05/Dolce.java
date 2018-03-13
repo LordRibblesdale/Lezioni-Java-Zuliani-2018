@@ -1,5 +1,5 @@
 public abstract class Dolce {
-   String nome;
+   private String nome;
 
    Dolce() {
       nome = "NoName";

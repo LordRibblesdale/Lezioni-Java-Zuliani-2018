@@ -1,5 +1,5 @@
 public class Ciambellone extends Dolce {
-   String[] ingredienti;
+   private String[] ingredienti;
 
    Ciambellone() {
       super();
@@ -18,7 +18,7 @@ public class Ciambellone extends Dolce {
    }
 
    public String descrizione() {
-      String tmp = "";
+      String tmp = "\n";
       for (int i = 0; i < ingredienti.length; i++) {
          tmp += ingredienti[i] + "\n";
       }
