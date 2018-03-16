@@ -1,5 +1,5 @@
 public class Borsello implements Valutabile {
-   private int monete_oro, monete_argento, monete_bronzo;
+   protected int monete_oro, monete_argento, monete_bronzo;
 
    Borsello(int gold, int silver, int copper) {
       monete_oro = gold;
