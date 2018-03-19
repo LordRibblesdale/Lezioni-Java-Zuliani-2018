@@ -2,20 +2,24 @@ import java.util.Scanner;
 
 public class Eser03_04 {
    public static int generaNumeroCasuale() {
-      int rnd = (int)Math.floor(Math.random()*3)+1;
-      String s = "";
+      int rnd = (int)Math.floor(Math.random()*3)+1, num = 0;
+      // String s = "";
       switch (rnd) {
          case 1:
-            s = "333" + (int)Math.floor(Math.random()*999999);
+//          s = "333" + (int)Math.floor(Math.random()*999999);
+            num = (int)Math.floor(Math.random()*1000000) + 333000000;
             break;
          case 2:
-            s = "348" + (int)Math.floor(Math.random()*999999);
+//          s = "348" + (int)Math.floor(Math.random()*999999);
+            num = (int)Math.floor(Math.random()*1000000) + 348000000;
             break;
          case 3:
-            s = "389" + (int)Math.floor(Math.random()*999999);
+//          s = "389" + (int)Math.floor(Math.random()*999999);
+            num = (int)Math.floor(Math.random()*1000000) + 389000000;
             break;
       }
-      return Integer.parseInt(s);
+//    return Integer.parseInt(s);
+      return num;
    }
 
    public static int generaNumeroManualmente() {
