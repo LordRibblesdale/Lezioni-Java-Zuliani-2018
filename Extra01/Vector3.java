@@ -1,4 +1,4 @@
-public class Vector3<E> implements Sommabile<E> {
+public class Vector3<E extends Sommabile<E>> {
    private E x, y, z;
 
    Vector3(E x, E y, E z) {
