@@ -28,12 +28,9 @@ public class Grattacielo {
    public static void main(String[] args) {
       Hashtable<Integer, String> piani = new Hashtable<Integer, String>();
       Scanner in = new Scanner(System.in);
-      int floor;
+      int floor = -1;
 
       piani.put(new Integer(0), "Hall");
-
-      System.out.print("Choose a floor: ");
-      floor = selection(0, 99);
 
       while (floor != 0) {
          class Repeat {
@@ -68,6 +65,9 @@ public class Grattacielo {
             }
          }
 
+         System.out.print("Choose a floor: ");
+         floor = selection(0, 99);
+
          if (piani.get(floor) == null) {
             System.out.print("What is this floor should be used for? :");
             piani.put(floor, in.nextLine());
@@ -77,6 +77,6 @@ public class Grattacielo {
          }
       }
 
-      
+
    }
 }
