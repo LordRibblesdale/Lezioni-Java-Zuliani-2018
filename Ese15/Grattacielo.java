@@ -42,7 +42,7 @@ public class Grattacielo {
             }
 
             public void isWritable(int floorIn) {
-               if (piani.get(floorIn) != null) {
+               if (piani.get(new Integer(floorIn)) != null) {
                   System.out.print("There is already something here. Do you want to replace? [y-n]");
                   c = in.nextLine().charAt(0);
                   switch (c) {
@@ -52,10 +52,10 @@ public class Grattacielo {
                         while (tmp == 0) {
                            tmp = selection (-1, 99);
                         }
-                        if (tmp != -1 && piani.get(tmp) == null) {
-                           piani.put(tmp, piani.get(floorIn));
+                        if (tmp != -1 && piani.get(new Integer(tmp)) == null) {
+                           piani.put(new Integer(tmp), piani.get(floorIn));
                            System.out.print("What is this floor should be used for? ");
-                           piani.put(floorIn, in.nextLine());
+                           piani.put(new Integer(floorIn), in.nextLine());
                            break;
                         } else {
                            isWritable(tmp);
@@ -68,12 +68,14 @@ public class Grattacielo {
          System.out.print("Choose a floor: ");
          floor = selection(0, 99);
 
-         if (piani.get(floor) == null) {
+         if (piani.get(new Integer(floor)) == null) {
             System.out.print("What is this floor should be used for? :");
-            piani.put(floor, in.nextLine());
-         } else {
+            piani.put(new Integer(floor), in.nextLine());
+         } else if (floor != 0) {
             Repeat tryFloor = new Repeat();
             tryFloor.isWritable(floor);
+         } else {
+            System.exit(0);
          }
       }
 
