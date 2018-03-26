@@ -37,12 +37,14 @@ public class Incrocio {
 
       for (int i = 0; i < num; i++) {
          for (int j = ((int)Math.floor(Math.random()*3)+3); j > 0; j--) {
-            stradaA.add(generaTarga());
-            System.out.println(stradaA.peek() + " si e' aggiunta alla coda sulla strada A");
+            String tmp = generaTarga();
+            stradaA.add(tmp);
+            System.out.println(tmp + " si e' aggiunta alla coda sulla strada A");
          }
          for (int j = ((int)Math.floor(Math.random()*3)+3); j > 0; j--) {
-            stradaB.add(generaTarga());
-            System.out.println(stradaB.peek() + " si e' aggiunta alla coda sulla strada B");
+            String tmp = generaTarga();
+            stradaB.add(tmp);
+            System.out.println(tmp + " si e' aggiunta alla coda sulla strada B");
          }
 
          for (int j = ((int)Math.floor(Math.random()*3)+1); j > 0; j--) {
