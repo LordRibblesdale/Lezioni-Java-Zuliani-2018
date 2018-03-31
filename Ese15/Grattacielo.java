@@ -12,6 +12,8 @@ public class Grattacielo {
       int choice = 0;
       System.out.print("Insert a value: ");
       choice = selIn.nextInt();
+      selIn.nextLine();
+
 
       try {
          if (choice < start || choice > finish) {
@@ -27,6 +29,7 @@ public class Grattacielo {
 
    public static void main(String[] args) {
       Hashtable<Integer, String> piani = new Hashtable<Integer, String>();
+      Enumeration<Integer> keys = null;
       Scanner in = new Scanner(System.in);
       int floor = -1;
 
@@ -41,8 +44,11 @@ public class Grattacielo {
                tmp = 0;
             }
 
-            public void isWritable(int floorIn) {
-               if (piani.get(new Integer(floorIn)) != null) {
+            public boolean isWritable(int floorIn) {
+               boolean isDone = false;
+               tmp = 0;
+
+               if (piani.containsKey(new Integer(floorIn))) {
                   System.out.print("There is already something here. Do you want to replace? [y-n]");
                   c = in.nextLine().charAt(0);
                   switch (c) {
@@ -52,33 +58,37 @@ public class Grattacielo {
                         while (tmp == 0) {
                            tmp = selection (-1, 99);
                         }
-                        if (tmp != -1 && piani.get(new Integer(tmp)) == null) {
+                        if (tmp != -1 && !(piani.containsKey(new Integer(tmp)))) {
                            piani.put(new Integer(tmp), piani.get(floorIn));
                            System.out.print("What is this floor should be used for? ");
                            piani.put(new Integer(floorIn), in.nextLine());
-                           break;
+                           isDone = true;
                         } else {
-                           isWritable(tmp);
+                           isDone = isWritable(tmp);
                         }
                   }
                }
+               return isDone;
             }
          }
 
          System.out.print("Choose a floor: ");
          floor = selection(0, 99);
 
-         if (piani.get(new Integer(floor)) == null) {
+         if (!(piani.containsKey(new Integer(floor)))) { //         if (piani.get(new Integer(floor)) == null) {
             System.out.print("What is this floor should be used for? :");
             piani.put(new Integer(floor), in.nextLine());
          } else if (floor != 0) {
             Repeat tryFloor = new Repeat();
             tryFloor.isWritable(floor);
          } else {
+            keys = piani.keys();
+            while (keys.hasMoreElements()) {
+               int k = keys.nextElement();
+               System.out.println("Piano " + k + ": " + piani.get(k));
+            }
             System.exit(0);
          }
       }
-
-
    }
 }

@@ -84,7 +84,8 @@ public class BuilderCycle {
                break;
             case 2:
                try {
-                  System.out.println("Removing Mattoncino: Altezza=" + mattoncini.pop().getAltezza() + " Larghezza=" + mattoncini.pop().getLarghezza() + " Colore: " + mattoncini.pop().getColore());
+                  Mattoncino tmp = mattoncini.pop();
+                  System.out.println("Removing Mattoncino: Altezza=" + tmp.getAltezza() + " Larghezza=" + tmp.getLarghezza() + " Colore: " + tmp.getColore());
                } catch (EmptyStackException e) {
                   System.out.println("Empty Stack");
                }
@@ -101,6 +102,7 @@ public class BuilderCycle {
                while (!(mattoncini.empty())) {
                   try {
                      System.out.println("Destroying Mattoncino: Altezza=" + mattoncini.peek().getAltezza() + " Larghezza=" + mattoncini.peek().getLarghezza() + " Colore: " + mattoncini.peek().getColore());
+                     mattoncini.pop();
                   } catch (EmptyStackException e) {
                      System.out.println("Empty Stack");
                   }
@@ -108,6 +110,7 @@ public class BuilderCycle {
                System.exit(0);
                break;
          }
+         System.out.println();
       }
    }
 }
