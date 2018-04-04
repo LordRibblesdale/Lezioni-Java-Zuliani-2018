@@ -1,4 +1,6 @@
+import java.util.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class ListaPersone {
@@ -21,15 +23,15 @@ public class ListaPersone {
          do {
             try {
                eta = in.nextInt();
+               in.nextLine();
             } catch (InputMismatchException e) {
                System.out.println("Error: wrong values!");
             }
          } while (eta <= 0);
-         in.nextLine();
          System.out.print("Insert sex ");
          do {
             sesso = in.nextLine().charAt(0);
-         } while (sesso != 'f' || sesso != 'm' || sesso != 'u');
+         } while (sesso != 'f' && sesso != 'm' && sesso != 'u');
 
          System.out.println("Adding...\n");
          people.add(new Persona(nome, cognome, eta, sesso));
@@ -62,8 +64,10 @@ public class ListaPersone {
          }
       }
 
-      for (int i = 0; i < people.size()-1; i++) {
-         people.sort(people.get(i).compareTo(people.get(i+1)));
+      Collections.sort(people);
+
+      for (int i = 0; i < people.size(); i++) {
+         System.out.println(people.get(i));
       }
    }
 }
