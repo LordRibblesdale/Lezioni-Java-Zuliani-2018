@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ListaPersoneTemporizzata_Inner {
    private static ArrayList<Persona> persone = new ArrayList<Persona>();
@@ -57,6 +58,36 @@ public class ListaPersoneTemporizzata_Inner {
 
          public void actionPerformed(ActionEvent e) {
             getLista().add(generaPersona());
+
+            int tmp = (int)Math.floor(Math.random()*5)+1;
+            for (int i = 0; i < getLista().size(); i++) {
+               switch (tmp) {
+                  case 1:
+                     getLista().get(i).setOrdinamento(Ordinamento.perNome);
+                     break;
+                  case 2:
+                     getLista().get(i).setOrdinamento(Ordinamento.perCognome);
+                     break;
+                  case 3:
+                     getLista().get(i).setOrdinamento(Ordinamento.perNomeCompleto);
+                     break;
+                  case 4:
+                     getLista().get(i).setOrdinamento(Ordinamento.perEta);
+                     break;
+                  case 5:
+                     persone.get(i).setOrdinamento(Ordinamento.perGenere);
+                     break;
+               }
+            }
+
+            System.out.println("Aggiunta persona: " + getLista().get(getLista().size()-1));
+            System.out.println("Ordimanento usato: " + getLista().get(0).getOrdinamento());
+
+            Collections.sort(getLista());
+
+            for (int i = 0; i < getLista().size(); i++) {
+               System.out.println(getLista().get(i));
+            }
          }
       }
 
