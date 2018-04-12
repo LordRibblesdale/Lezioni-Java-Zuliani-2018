@@ -1,6 +1,8 @@
 import javax.swing.JFrame;          //Used for window initialisation
 import javax.swing.JLabel;          //Used for labels
+import javax.swing.JPanel;
 import java.awt.GridLayout;         //Specifically used as component layout
+import java.awt.FlowLayout;
 //import javax.swing.SwingConstants;  //Used to assing positions in layoyts
 import javax.swing.JOptionPane;     //Used for dialogs
 import javax.swing.JTextField;      //Used for text field
@@ -35,7 +37,7 @@ class WindowA extends JFrame {
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Sets what to do closing the window
                                                       //This closes the program
 
-      setLayout(new GridLayout(1, 2));
+      setLayout(new FlowLayout());
 
       label2 = new JLabel(" <- Images -> ");
       label2.setIcon(icon);
@@ -67,6 +69,8 @@ class WindowB extends JFrame {
       int height = 150;
       setSize(width, height);               //Only for window dimension
 
+      setLayout(new FlowLayout());
+
       // Toolkit kit = Toolkit.getDefaultToolkit();   //Obtaining tools for screen dimension (in this case)
       // Dimension screenSize = kit.getScreenSize();  //Obtaining screen dimensions
 
@@ -87,8 +91,11 @@ class WindowB extends JFrame {
 }
 
 class WindowC extends JFrame {
+   private JPanel panel;
+
    WindowC() {
       super("WindowC");
+      panel = new JPanel();
 
       // URL icon_url = getClass().getResource("computer.png");
       Image icon = new ImageIcon(getClass().getResource("computer.png")).getImage();
@@ -99,7 +106,8 @@ class WindowC extends JFrame {
       int height = 350;
       setSize(width, height);               //Only for window dimension
 
-      setBackground(Color.BLUE);
+      panel.setBackground(Color.BLUE);
+      add(panel);
 
       // Toolkit kit = Toolkit.getDefaultToolkit();   //Obtaining tools for screen dimension (in this case)
       // Dimension screenSize = kit.getScreenSize();  //Obtaining screen dimensions
