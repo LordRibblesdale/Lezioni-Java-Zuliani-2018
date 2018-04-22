@@ -69,7 +69,7 @@ public class ActionTree extends JFrame {
                   String s = "";
 
                   nameValue.setText(((Azione)node.getUserObject()).getNome());
-                  for (int i = 0; i < dir.length; i++) {
+                  for (int i = 0; i < dir.length-1; i++) {
                      s += dir[i];
                   }
                   typeValue.setText(s);
