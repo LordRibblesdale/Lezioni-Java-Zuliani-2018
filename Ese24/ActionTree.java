@@ -80,7 +80,8 @@ public class ActionTree extends JFrame {
          }
       });
 
-      tree.setPreferredSize(new Dimension(100, 200));
+      branch.setPreferredSize(new Dimension(200, 300));
+      branch.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
       tree.add(branch);
 
       items = new JPanel[3];
@@ -101,7 +102,7 @@ public class ActionTree extends JFrame {
       panel.add(item);
       add(panel);
 
-      getContentPane().setBackground(new Color(Color.WHITE));
+      getContentPane().setBackground(new Color(1, 1, 1));
 
       setSize(500, 500);
       setLocationRelativeTo(null);
