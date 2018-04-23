@@ -33,23 +33,24 @@ public class CustomExpansiveTableText extends JFrame {
                text0.setText("");
                text1.setText("");
                validate();
-            } else {
-               if (i == 3) {
-                  model = new ModelloStudenti(students);
-                  button.setText("Aggiungi");
-                  table = new JTable(model);
-                  table.setAutoCreateRowSorter(true);
-                  panel.add(table.getTableHeader());
-                  panel.add(table);
-                  validate();
-               } else if (i >= 3) {
+            }
+            if (i == 2) {
+               model = new ModelloStudenti(students);
+               button.setText("Aggiungi");
+               table = new JTable(model);
+               table.setAutoCreateRowSorter(true);
+               panel.add(table.getTableHeader());
+               panel.add(table);
+               validate();
+            }
+            if (i >= 3) {
                   model.addStudent(new Studente(text0.getText(), text1.getText(), (int)Math.floor(Math.random()*90000)+10000, (int)Math.floor(Math.random()*13)+18, (int)Math.floor(Math.random()*Math.abs(20-model.getRowCount()))+model.getRowCount()));
                   text0.setText("");
                   text1.setText("");
                   table = new JTable(model);
                   validate();
                }
-            }
+
          }
       });
 
