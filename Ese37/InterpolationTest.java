@@ -9,7 +9,7 @@ public class InterpolationTest extends JFrame {
    private JTabbedPane t;
    private JPanel panel, panel0, panel1, pane[] = new JPanel[10];
    private BoxLayout box;
-   private int r, g, bl;
+   private float r, g, bl;
 
    InterpolationTest() {
       t = new JTabbedPane();
@@ -23,10 +23,10 @@ public class InterpolationTest extends JFrame {
       ActionListener l = new ActionListener() {
          public void actionPerformed(ActionEvent e) {
             for (int i = 0; i < pane.length; i++) {
-               r = (1 - (i/pane.length))*c[0].getColor().getRed() + (i/pane.length)*c[1].getColor().getRed();
-               g = (1 - (i/pane.length))*c[0].getColor().getGreen() + (i/pane.length)*c[1].getColor().getGreen();
-               bl = (1 - (i/pane.length))*c[0].getColor().getBlue() + (i/pane.length)*c[1].getColor().getBlue();
-               pane[i].setBackground(new Color(r, g, bl));
+               r = (1 - ((float)i/pane.length))*c[0].getColor().getRed() + ((float)i/pane.length)*c[1].getColor().getRed();
+               g = (1 - ((float)i/pane.length))*c[0].getColor().getGreen() + ((float)i/pane.length)*c[1].getColor().getGreen();
+               bl = (1 - ((float)i/pane.length))*c[0].getColor().getBlue() + ((float)i/pane.length)*c[1].getColor().getBlue();
+               pane[i].setBackground(new Color((int)r, (int)g, (int)bl));
             }
             validate();
          }
@@ -41,12 +41,11 @@ public class InterpolationTest extends JFrame {
       gradient.getVerticalScrollBar().setUnitIncrement(10);
 
       for (int i = 0; i < pane.length; i++) {
-         r = ((1 - (i/pane.length))*c[0].getColor().getRed() + (i/pane.length)*c[1].getColor().getRed());
-         g = ((1 - (i/pane.length))*c[0].getColor().getGreen() + (i/pane.length)*c[1].getColor().getGreen());
-         bl = ((1 - (i/pane.length))*c[0].getColor().getBlue() + (i/pane.length)*c[1].getColor().getBlue());
+         r = ((1 - ((float)i/pane.length))*c[0].getColor().getRed() + ((float)i/pane.length)*c[1].getColor().getRed());
+         g = ((1 - ((float)i/pane.length))*c[0].getColor().getGreen() + ((float)i/pane.length)*c[1].getColor().getGreen());
+         bl = ((1 - ((float)i/pane.length))*c[0].getColor().getBlue() + ((float)i/pane.length)*c[1].getColor().getBlue());
          (pane[i] = new JPanel()).setPreferredSize(new Dimension(400, 150));
-         pane[i].setBackground(new Color(r, g, bl));
-
+         pane[i].setBackground(new Color((int)r, (int)g, (int)bl));
          panel.add(pane[i]);
          panel.add(Box.createRigidArea(new Dimension(0, 5)));
       }
