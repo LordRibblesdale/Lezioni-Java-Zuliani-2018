@@ -22,10 +22,10 @@ public class SpringBreak extends JFrame {
       l.putConstraint(SpringLayout.NORTH, t2, 5, SpringLayout.SOUTH, t1);
 
       l.putConstraint(SpringLayout.WEST, t3, 5, SpringLayout.WEST, getContentPane());
-      l.putConstraint(SpringLayout.SOUTH, t3, 20, SpringLayout.SOUTH, t2);
+      l.putConstraint(SpringLayout.NORTH, t3, 20, SpringLayout.SOUTH, t2);
       //l.putConstraint(SpringLayout.SOUTH, t3, 0, SpringLayout.NORTH, t4);
 
-      l.putConstraint(SpringLayout.NORTH, t4, 20, SpringLayout.SOUTH, t2);
+      l.putConstraint(SpringLayout.SOUTH, t4, 20, SpringLayout.SOUTH, t3);
       //l.putConstraint(SpringLayout.EAST, t4, 5, SpringLayout.EAST, getContentPane());
       l.putConstraint(SpringLayout.WEST, t4, 5, SpringLayout.EAST, t3);
 
