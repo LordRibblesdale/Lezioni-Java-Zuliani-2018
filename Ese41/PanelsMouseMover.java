@@ -16,10 +16,6 @@ public class PanelsMouseMover extends JFrame {
       yellow.setBounds(0, getHeight(), 50, 50);
       yellow.setBackground(Color.YELLOW);
 
-      addMouseListener(new MouseAdapter() {
-
-      });
-
       addMouseMotionListener(new MouseMotionAdapter() {
          public void mouseMoved(MouseEvent arg0) {
             System.out.println(arg0.getPoint());
