@@ -22,7 +22,7 @@ public class RotatingCircle extends JFrame {
 
    private ExtendedPanel p;
    private Timer t;
-   private double x = 0, y = 0, theta = 0;
+   private double x = 0, y = 0, theta = 0.57;
 
    RotatingCircle() {
       p = new ExtendedPanel();
@@ -38,11 +38,10 @@ public class RotatingCircle extends JFrame {
          }
       });
 
-      t = new Timer(50, new ActionListener(){
+      t = new Timer(50, new ActionListener() {
          public void actionPerformed(ActionEvent arg0) {
             x = p.green.getX() - p.red.getX();
             y = p.green.getY() - p.red.getY();
-            theta = Math.atan(x/y);
 
             x = Math.cos(theta)*x - Math.sin(theta)*y;
             y = Math.cos(theta)*x + Math.sin(theta)*y;
@@ -51,7 +50,24 @@ public class RotatingCircle extends JFrame {
             y += p.red.getY();
 
             p.green.setFrame(x, y, p.green.getWidth(), p.green.getHeight());
+
+            p.repaint();
          }
       });
+
+      t.start();
+
+      p.requestFocusInWindow();
+      add(p);
+
+      setResizable(false);
+      setSize(500, 700);
+      setLocationRelativeTo(null);
+      setVisible(true);
+      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   }
+
+   public static void main(String[] args) {
+      RotatingCircle r = new RotatingCircle();
    }
 }
