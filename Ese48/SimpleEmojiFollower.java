@@ -53,10 +53,15 @@ class SimpleEmojiFollower extends JFrame {
 
       ep.addMouseListener(new MouseAdapter() {
          public void mouseClicked(MouseEvent arg0) {
-            ep.m.setDirection(new Point2D.Double(arg0.getX() - ep.m.face.getCenterX(), arg0.getY() - ep.m.face.getCenterY()));
-            ep.m.setSpeed((float) ep.m.n/10);
-            ep.x = ep.m.getDirection().getX();
-            ep.y = ep.m.getDirection().getY();
+            if (!ep.m.face.contains(arg0.getPoint())) {
+               ep.m.setDirection(new Point2D.Double(arg0.getX() - ep.m.face.getCenterX(), arg0.getY() - ep.m.face.getCenterY()));
+               ep.m.setSpeed((float) ep.m.n/10);
+               ep.x = ep.m.getDirection().getX();
+               ep.y = ep.m.getDirection().getY();
+            } else {
+               ep.m.setDirection(new Point2D.Double(0, 0));
+            }
+
             ep.t.start();
          }
       });
