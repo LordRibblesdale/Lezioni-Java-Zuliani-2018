@@ -15,14 +15,17 @@ public class RotatingCircle extends JFrame {
       public void paintComponent(Graphics g) {
          super.paintComponent(g);
 
+         ((Graphics2D) g).setPaint(Color.RED);
          ((Graphics2D) g).draw(red);
+         ((Graphics2D) g).setPaint(Color.GREEN);
          ((Graphics2D) g).draw(green);
       }
    }
 
    private ExtendedPanel p;
    private Timer t;
-   private double x = 0, y = 0, theta = 0.57;
+
+   private double x = 0, y = 0, theta = -(50/1000f);
 
    RotatingCircle() {
       p = new ExtendedPanel();
@@ -31,7 +34,7 @@ public class RotatingCircle extends JFrame {
             if (e.getButton() == MouseEvent.BUTTON1) {
                p.red.setFrame(e.getX() - p.red.getWidth()/2, e.getY() - p.red.getHeight()/2, p.red.getWidth(), p.red.getHeight());
             } else if (e.getButton() == MouseEvent.BUTTON3) {
-               p.red.setFrame(e.getX() - p.red.getWidth()/2, e.getY() - p.red.getHeight()/2, p.red.getWidth(), p.red.getHeight());
+               p.green.setFrame(e.getX() - p.green.getWidth()/2, e.getY() - p.green.getHeight()/2, p.green.getWidth(), p.green.getHeight());
             }
 
             p.repaint();
@@ -44,7 +47,7 @@ public class RotatingCircle extends JFrame {
             y = p.green.getY() - p.red.getY();
 
             x = Math.cos(theta)*x - Math.sin(theta)*y;
-            y = Math.cos(theta)*x + Math.sin(theta)*y;
+            y = Math.sin(theta)*x + Math.cos(theta)*y;
 
             x += p.red.getX();
             y += p.red.getY();
