@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
+import javax.swing.Timer;
 
 public class RotatingCircle extends JFrame {
    class ExtendedPanel extends JPanel {
@@ -14,18 +15,19 @@ public class RotatingCircle extends JFrame {
 
       public void paintComponent(Graphics g) {
          super.paintComponent(g);
+         Graphics2D g2 = (Graphics2D) g;
 
-         ((Graphics2D) g).setPaint(Color.RED);
-         ((Graphics2D) g).draw(red);
-         ((Graphics2D) g).setPaint(Color.GREEN);
-         ((Graphics2D) g).draw(green);
+         g2.setPaint(Color.RED);
+         g2.draw(red);
+         g2.setPaint(Color.GREEN);
+         g2.draw(green);
       }
    }
 
    private ExtendedPanel p;
    private Timer t;
 
-   private double x = 0, y = 0, theta = -(50/1000f);
+   private double x = 0, y = 0, theta = -(50/1000.0);
 
    RotatingCircle() {
       p = new ExtendedPanel();
@@ -43,6 +45,7 @@ public class RotatingCircle extends JFrame {
 
       t = new Timer(50, new ActionListener() {
          public void actionPerformed(ActionEvent arg0) {
+            /*
             x = p.green.getX() - p.red.getX();
             y = p.green.getY() - p.red.getY();
 
@@ -50,9 +53,23 @@ public class RotatingCircle extends JFrame {
             y = Math.sin(theta)*x + Math.cos(theta)*y;
 
             x += p.red.getX();
-            y += p.red.getY();
+            y +
 
             p.green.setFrame(x, y, p.green.getWidth(), p.green.getHeight());
+
+            p.repaint();
+            */
+
+            x = p.green.getCenterX() - p.red.getCenterX();
+            y = p.green.getCenterY() - p.red.getCenterY();
+
+            x = Math.cos(theta)*x - Math.sin(theta)*y;
+            y = Math.sin(theta)*x + Math.cos(theta)*y;
+
+            x += p.red.getCenterX();
+            y += p.red.getCenterY();
+
+            p.green.setFrameFromCenter(x, y, x + p.green.getWidth()/2, y + p.green.getHeight()/2);
 
             p.repaint();
          }

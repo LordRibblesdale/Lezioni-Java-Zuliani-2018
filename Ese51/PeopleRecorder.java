@@ -9,8 +9,9 @@ public class PeopleRecorder extends JFrame {
    private JScrollPane centerS;
    private JButton add, load, save;
    private ArrayList<JTextField> n, s, a;
-   private ObjectInputStream input;
-   private ObjectOutputStream output;
+   private Scanner input;
+   private Formatter output;
+   private PrintWriter o2;
    private ArrayList<Persona> p;
 
    PeopleRecorder() {
@@ -53,7 +54,8 @@ public class PeopleRecorder extends JFrame {
             a = new ArrayList<JTextField>();
 
             try {
-               input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(getClass().getResource("Persone.bin").getPath().replaceAll("%20", " "))));
+               //getClass().getResource("Persone.bin").getPath().replaceAll("%20", " ")
+               input = new ;
                p = ((ArrayList<Persona>) input.readObject());
                input.close();
             } catch (ClassNotFoundException f) {
