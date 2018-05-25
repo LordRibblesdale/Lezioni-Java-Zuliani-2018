@@ -23,6 +23,7 @@ public class PeopleRecorder extends JFrame {
       n = new ArrayList<JTextField>();
       s = new ArrayList<JTextField>();
       a = new ArrayList<JTextField>();
+      p = new ArrayList<Persona>();
 
       pageEnd = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
@@ -31,7 +32,7 @@ public class PeopleRecorder extends JFrame {
          public void actionPerformed(ActionEvent e) {
             n.add(new JTextField(10));
             s.add(new JTextField(10));
-            a.add(new JTextField(10));
+            a.add(new JTextField("1", 10));
 
             center.add(new JLabel("Nome: "));
             center.add(n.get(n.size()-1));
@@ -40,7 +41,8 @@ public class PeopleRecorder extends JFrame {
             center.add(new JLabel("Eta': "));
             center.add(a.get(a.size()-1));
 
-            centerS.repaint();
+            //centerS.repaint();
+            validate();
          }
       });
 
@@ -51,10 +53,18 @@ public class PeopleRecorder extends JFrame {
             n = new ArrayList<JTextField>();
             s = new ArrayList<JTextField>();
             a = new ArrayList<JTextField>();
+            p = new ArrayList<Persona>();
 
             try {
                input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(getClass().getResource("Persone.bin").getPath().replaceAll("%20", " "))));
-               p = ((ArrayList<Persona>) input.readObject());
+               ArrayList<?> tmp = (ArrayList<?>) input.readObject();
+
+               for (int i = 0; i < tmp.size(); i++) {
+                  if (tmp.get(i) instanceof Persona) {
+                     p.add((Persona) tmp.get(i));
+                  }
+               }
+
                input.close();
             } catch (ClassNotFoundException f) {
                f.printStackTrace();
@@ -63,9 +73,9 @@ public class PeopleRecorder extends JFrame {
             }
 
             for (int i = 0; i < p.size(); i++) {
-               n.add(new JTextField(p.get(i).getNome()));
-               s.add(new JTextField(p.get(i).getCognome()));
-               a.add(new JTextField(p.get(i).getEta()));
+               n.add(new JTextField(p.get(i).getNome(), 10));
+               s.add(new JTextField(p.get(i).getCognome(), 10));
+               a.add(new JTextField(String.valueOf(p.get(i).getEta()), 10));
                center.add(new JLabel("Nome: "));
                center.add(n.get(i));
                center.add(new JLabel("Cognome: "));
@@ -73,8 +83,10 @@ public class PeopleRecorder extends JFrame {
                center.add(new JLabel("Eta': "));
                center.add(a.get(i));
             }
+            centerS.setViewportView(center);
 
-            centerS.repaint();
+            //centerS.repaint();
+            validate();
          }
       });
 
