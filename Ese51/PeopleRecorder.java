@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PeopleRecorder extends JFrame {
    private JPanel center, pageEnd;
@@ -10,8 +11,7 @@ public class PeopleRecorder extends JFrame {
    private JButton add, load, save;
    private ArrayList<JTextField> n, s, a;
    private Scanner input;
-   private Formatter output;
-   private PrintWriter o2;
+   private PrintWriter output;
    private ArrayList<Persona> p;
 
    PeopleRecorder() {
@@ -24,6 +24,8 @@ public class PeopleRecorder extends JFrame {
       n = new ArrayList<JTextField>();
       s = new ArrayList<JTextField>();
       a = new ArrayList<JTextField>();
+      p = new ArrayList<Persona>();
+
 
       pageEnd = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
@@ -41,7 +43,7 @@ public class PeopleRecorder extends JFrame {
             center.add(new JLabel("Eta': "));
             center.add(a.get(a.size()-1));
 
-            centerS.repaint();
+            validate();
          }
       });
 
@@ -52,14 +54,19 @@ public class PeopleRecorder extends JFrame {
             n = new ArrayList<JTextField>();
             s = new ArrayList<JTextField>();
             a = new ArrayList<JTextField>();
+            p = new ArrayList<Persona>();
 
             try {
                //getClass().getResource("Persone.bin").getPath().replaceAll("%20", " ")
-               input = new ;
-               p = ((ArrayList<Persona>) input.readObject());
+               input = new Scanner(new BufferedReader(new FileReader(getClass().getResource("Persone.txt").getPath().replaceAll("%20", " "))));
+               p = new ArrayList<Persona>();
+
+               while (input.hasNext()) {
+                  p.add(new Persona(input.nextLine(), input.nextLine(), Integer.parseInt(input.nextLine())));
+                  input.nextLine();
+               }
+
                input.close();
-            } catch (ClassNotFoundException f) {
-               f.printStackTrace();
             } catch (IOException f) {
                f.printStackTrace();
             }
@@ -75,8 +82,10 @@ public class PeopleRecorder extends JFrame {
                center.add(new JLabel("Eta': "));
                center.add(a.get(i));
             }
+            
+            centerS.setViewportView(center);
 
-            centerS.repaint();
+            validate();
          }
       });
 
@@ -88,8 +97,20 @@ public class PeopleRecorder extends JFrame {
             }
 
             try {
-               output = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(getClass().getResource("Persone.bin").getPath().replaceAll("%20", " "))));
-               output.writeObject(p);
+               output = new PrintWriter(new BufferedWriter(new FileWriter(getClass().getResource("Persone.txt").getPath().replaceAll("%20", " "))));
+
+               for (int i = 0; i < p.size(); i++) {
+                  output.write(p.get(i).getNome() + "\n" + p.get(i).getCognome() + "\n" + p.get(i).getEta() + "\n\n");
+               }
+
+               output.close();
+
+               output = new PrintWriter(new BufferedWriter(new FileWriter(getClass().getResource("PersoneOut.txt").getPath().replaceAll("%20", " "))));
+
+               for (int i = 0; i < p.size(); i++) {
+                  output.format(p.get(i).toString());
+               }
+
                output.close();
             } catch (IOException f) {
                f.printStackTrace();

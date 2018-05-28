@@ -35,6 +35,6 @@ public class Persona implements Serializable {
    }
 
    public String toString() {
-      return "Nome: " + getNome() + "\nCognome: " + getCognome() + "\nEta: " + getEta();
+      return "Nome: " + getNome() + "\nCognome: " + getCognome() + "\nEta: " + getEta() + "\n";
    }
 }
