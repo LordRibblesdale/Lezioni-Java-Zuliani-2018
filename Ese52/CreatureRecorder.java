@@ -112,7 +112,7 @@ public class CreatureRecorder extends JFrame {
                   int i = s.lastIndexOf(".");
 
                   if (i != -1) {
-                     String e = s.substring(ix+1, s.length());
+                     String e = s.substring(i+1, s.length());
 
                      return e.equalsIgnoreCase(bin);
                   }
@@ -124,15 +124,20 @@ public class CreatureRecorder extends JFrame {
                   return "*.bin";
                }
             });
+            f.setAcceptAllFileFilterUsed(false);
 
             switch (f.showOpenDialog(CreatureRecorder.this)) {
                case JFileChooser.APPROVE_OPTION:
                   try {
                      input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(f.getSelectedFile())));
 
-                     ArrayList<?> c = (ArrayList<?>) input.readObject();
+                     try {
+                        ArrayList<?> c = (ArrayList<?>) input.readObject();
+                     } catch (ClassNotFoundException g) {
+                        g.printStackTrace();
+                     }
 
-                     for (int i = 0; i < c.size(); i++) {
+                     for (int i = 0; i < creatures.size(); i++) {
 
                      }
                   } catch (IOException g) {
@@ -218,5 +223,9 @@ public class CreatureRecorder extends JFrame {
       setLocationRelativeTo(null);
       setVisible(true);
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   }
+
+   public static void main(String[] args) {
+
    }
 }

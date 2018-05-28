@@ -83,6 +83,8 @@ public class PeopleRecorder extends JFrame {
                center.add(new JLabel("Eta': "));
                center.add(a.get(i));
             }
+
+            p = new ArrayList<Persona>();
             centerS.setViewportView(center);
 
             //centerS.repaint();

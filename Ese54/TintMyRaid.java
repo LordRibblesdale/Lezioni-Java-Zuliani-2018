@@ -20,7 +20,7 @@ public class TintMyRaid extends JFrame {
          if (image != null) {
             editRGB(image);
             p.repaint();
-            setSize(edit.getWidth(), edit.getHeight());
+            setSize(edit.getWidth(), edit.getHeight() + bar.getHeight());
             validate();
          }
       }
@@ -43,6 +43,7 @@ public class TintMyRaid extends JFrame {
       openFile.addActionListener(new ActionListener(){
          public void actionPerformed(ActionEvent arg0) {
             JFileChooser f = new JFileChooser();
+            f.setAcceptAllFileFilterUsed(false);
             f.addChoosableFileFilter(new FileFilter() {
                private final String jpg = "jpeg";
                private final String png = "png";
@@ -76,7 +77,7 @@ public class TintMyRaid extends JFrame {
 
                editRGB(image);
                p.repaint();
-               setSize(edit.getWidth(), edit.getHeight());
+               setSize(edit.getWidth(), edit.getHeight() + bar.getHeight());
                validate();
             }
          }
@@ -111,7 +112,7 @@ public class TintMyRaid extends JFrame {
    }
 
    private void editRGB(BufferedImage img) {
-      edit = img;
+      edit = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
 
       for (int i = 0; i < edit.getWidth(); i++) {
          for (int j = 0; j < edit.getHeight(); j++) {

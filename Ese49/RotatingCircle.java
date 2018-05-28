@@ -45,26 +45,15 @@ public class RotatingCircle extends JFrame {
 
       t = new Timer(50, new ActionListener() {
          public void actionPerformed(ActionEvent arg0) {
-            /*
-            x = p.green.getX() - p.red.getX();
-            y = p.green.getY() - p.red.getY();
-
-            x = Math.cos(theta)*x - Math.sin(theta)*y;
-            y = Math.sin(theta)*x + Math.cos(theta)*y;
-
-            x += p.red.getX();
-            y +
-
-            p.green.setFrame(x, y, p.green.getWidth(), p.green.getHeight());
-
-            p.repaint();
-            */
+            double initialX;
 
             x = p.green.getCenterX() - p.red.getCenterX();
             y = p.green.getCenterY() - p.red.getCenterY();
 
+            initialX = x;
+
             x = Math.cos(theta)*x - Math.sin(theta)*y;
-            y = Math.sin(theta)*x + Math.cos(theta)*y;
+            y = Math.sin(theta)*initialX + Math.cos(theta)*y;
 
             x += p.red.getCenterX();
             y += p.red.getCenterY();
@@ -72,6 +61,7 @@ public class RotatingCircle extends JFrame {
             p.green.setFrameFromCenter(x, y, x + p.green.getWidth()/2, y + p.green.getHeight()/2);
 
             p.repaint();
+            Toolkit.getDefaultToolkit().sync();
          }
       });
 
