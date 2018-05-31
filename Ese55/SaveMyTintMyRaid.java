@@ -66,7 +66,7 @@ public class SaveMyTintMyRaid extends TintMyRaid {
                if (r == JFileChooser.APPROVE_OPTION) {
                   try {
                      //TODO Not working
-                     image = ImageIO.write(edit, f.getFileFilter().getDescription().substring(1), f.getSelectedFile());
+                     ImageIO.write(edit, f.getFileFilter().getDescription().substring(1), f.getSelectedFile());
                   } catch (IOException e) {
                      e.printStackTrace();
                   }
