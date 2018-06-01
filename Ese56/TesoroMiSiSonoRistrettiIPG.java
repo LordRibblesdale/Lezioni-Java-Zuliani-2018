@@ -111,23 +111,28 @@ public class TesoroMiSiSonoRistrettiIPG extends JFrame {
    }
 
    protected void editRGB(BufferedImage img, char mode) {
-      edit = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
-
       if (mode == 'i') {
-         for (int i = 0; i < 2*edit.getWidth(); i += 2) {
-            for (int j = 0; j < 2*edit.getHeight(); j += 2) {
-               edit.setRGB(i, j, (new Color(new Color(img.getRGB(i, j)).getRed(), new Color(img.getRGB(i, j)).getGreen(), new Color(img.getRGB(i, j)).getBlue())).getRGB());
-               edit.setRGB(i+1, j, (new Color(new Color(img.getRGB(i, j)).getRed(), new Color(img.getRGB(i, j)).getGreen(), new Color(img.getRGB(i, j)).getBlue())).getRGB());
-               edit.setRGB(i, j+1, (new Color(new Color(img.getRGB(i, j)).getRed(), new Color(img.getRGB(i, j)).getGreen(), new Color(img.getRGB(i, j)).getBlue())).getRGB());
-               edit.setRGB(i+1, j+1, (new Color(new Color(img.getRGB(i, j)).getRed(), new Color(img.getRGB(i, j)).getGreen(), new Color(img.getRGB(i, j)).getBlue())).getRGB());
+         edit = new BufferedImage(img.getWidth()*2, img.getHeight()*2, BufferedImage.TYPE_INT_ARGB);
+
+
+         for (int i = 0, h = 0; i < edit.getWidth(); i += 2, h++) {
+            for (int j = 0, k = 0; j < edit.getHeight(); j += 2, k++) {
+               int rgb = img.getRGB(h, k);
+
+               edit.setRGB(i, j, rgb);
+               edit.setRGB(i+1, j, rgb);
+               edit.setRGB(i, j+1, rgb);
+               edit.setRGB(i+1, j+1, rgb);
             }
          }
       } else if (mode == 'r') {
-         for (int i = 0; i < edit.getWidth()/2; i ++) {
-            for (int j = 0; j < edit.getHeight()/2; j++) {
-               int red = (new Color(img.getRGB(i, j)).getRed() + new Color(img.getRGB(i+1, j)).getRed() + new Color(img.getRGB(i, j+1)).getRed() + new Color(img.getRGB(i+1, j+1)).getRed())/4;
-               int green = (new Color(img.getRGB(i, j)).getGreen() + new Color(img.getRGB(i+1, j)).getGreen() + new Color(img.getRGB(i, j+1)).getGreen() + new Color(img.getRGB(i+1, j+1)).getGreen())/4;
-               int blue = (new Color(img.getRGB(i, j)).getBlue() + new Color(img.getRGB(i+1, j)).getBlue() + new Color(img.getRGB(i, j+1)).getBlue() + new Color(img.getRGB(i+1, j+1)).getBlue())/4;
+         edit = new BufferedImage(img.getWidth()/2, img.getHeight()/2, BufferedImage.TYPE_INT_ARGB);
+
+         for (int i = 0, h = 0; i < edit.getWidth(); i++, h += 2) {
+            for (int j = 0, k = 0; j < edit.getHeight(); j++, k += 2) {
+               int red = (new Color(img.getRGB(h, k)).getRed() + new Color(img.getRGB(h+1, k)).getRed() + new Color(img.getRGB(h, k+1)).getRed() + new Color(img.getRGB(h+1, k+1)).getRed())/4;
+               int green = (new Color(img.getRGB(h, k)).getGreen() + new Color(img.getRGB(h+1, k)).getGreen() + new Color(img.getRGB(h, k+1)).getGreen() + new Color(img.getRGB(h+1, k+1)).getGreen())/4;
+               int blue = (new Color(img.getRGB(h, k)).getBlue() + new Color(img.getRGB(h+1, k)).getBlue() + new Color(img.getRGB(h, k+1)).getBlue() + new Color(img.getRGB(h+1, k+1)).getBlue())/4;
                edit.setRGB(i, j, (new Color(red, green, blue)).getRGB());
             }
          }

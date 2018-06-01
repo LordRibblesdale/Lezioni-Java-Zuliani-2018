@@ -48,6 +48,7 @@ public class SaveMyTintMyRaid extends TintMyRaid {
                   if (i != -1) {
                      String e = s.substring(i+1, s.length());
 
+
                      return e.equalsIgnoreCase(jpg);
                   }
 
@@ -59,14 +60,17 @@ public class SaveMyTintMyRaid extends TintMyRaid {
                }
             });
 
+
             int r = 0;
             if (edit != null) {
                r = f.showSaveDialog(SaveMyTintMyRaid.this);
 
+               System.out.println(f.getFileFilter().getDescription().substring(1));
+
                if (r == JFileChooser.APPROVE_OPTION) {
                   try {
                      //TODO Not working
-                     ImageIO.write(edit, f.getFileFilter().getDescription().substring(1), f.getSelectedFile());
+                     ImageIO.write(edit, f.getFileFilter().getDescription().substring(2), f.getSelectedFile());
                   } catch (IOException e) {
                      e.printStackTrace();
                   }
