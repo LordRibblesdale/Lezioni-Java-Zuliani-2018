@@ -43,7 +43,7 @@ public class PhotoBlur extends JFrame {
 
       p.addMouseListener(new MouseAdapter() {
          public void mouseClicked(MouseEvent arg0) {
-            editRGB(edit, arg0.getPoint());
+            editRGB(edit);
             repaint();
          }
       });
@@ -57,25 +57,27 @@ public class PhotoBlur extends JFrame {
       setSize(600, 400);
    }
 
-   protected void editRGB(BufferedImage img, Point2D p) {
-      edit = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
-      Rectangle2D r = new Rectangle2D.Double(0, 0, edit.getWidth(), edit.getHeight());
-
-      for (int i = (int) p.getX(); i < (int) p.getX() + cursor.getWidth(); i++) {
-         for (int j = (int) p.getY(); j < (int) p.getY() + cursor.getHeight(); j++) {
+   protected void editRGB(BufferedImage img) {
+      for (int i = (int) cursor.getX(); i < (int) cursor.getX() + cursor.getWidth(); i++) {
+         for (int j = (int) cursor.getY(); j < (int) cursor.getY() + cursor.getHeight(); j++) {
             int pixels = 0;
-            double sum = 0;
+            int red = 0, green = 0, blue = 0;
 
-            for (int h = (int) p.getX()-10; h < p.getX()+10; h++) {
-               for (int k = (int) p.getY()-10; k < p.getY()+10; k++) {
-                  if (r.contains(new Point2D.Double(h, k))) {
-                     sum += edit.getRGB(h, k);
+            for (int h = i-10; h < i+10; h++) {
+               for (int k = j-10; k < j+10; k++) {
+                  if (h >= 0 && h < edit.getWidth() && k >= 0 && k < edit.getHeight()) {
+                     Color c = new Color(image.getRGB(h, k));
+                     red += c.getRed();
+                     green += c.getGreen();
+                     blue += c.getBlue();
                      pixels++;
                   }
                }
             }
 
-            edit.setRGB(i, j, (int) (sum/(float) pixels));
+            if (i >= 0 && i < edit.getWidth() && j >= 0 && j < edit.getHeight()) {
+               edit.setRGB(i, j, (new Color(red/pixels, green/pixels, blue/pixels)).getRGB());
+            }
          }
       }
    }
